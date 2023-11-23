@@ -298,6 +298,7 @@ class Boy:
         sy = self.y - server.background.window_bottom
 
         self.image.clip_draw(int(self.frame) * 100, self.action * 100, 100,100, sx, sy)
+        self.font.draw(self.x - 10, self.y + 50, f'{self.ball_count:02d}', (255, 255, 0))
         pass
 
     def get_bb(self):
@@ -305,4 +306,6 @@ class Boy:
 
     # fill here
     def handle_collision(self, group, other):
+        if group == 'Boy:Ball':
+            self.ball_count += 1
         pass

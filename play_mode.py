@@ -7,7 +7,9 @@ import game_framework
 import game_world
 
 import server
+from Drill14.ball import Ball
 from boy import Boy
+from ball import Ball
 
 # fill here
 from background import FixedBackground as Background
@@ -31,6 +33,16 @@ def init():
 
     server.boy = Boy()
     game_world.add_object(server.boy, 1)
+
+    global balls
+    balls = [Ball() for _ in range(100)]
+    game_world.add_objects(balls, 1)
+
+    # 충돌 상황을 등록... boy와 balls들의 충돌 상황 등록
+    game_world.add_collision_pair('Boy:Ball', server.boy, None)
+    # a 먼저 등록
+    for ball in balls:
+        game_world.add_collision_pair('Boy:Ball', None, ball)
     pass
 
 
